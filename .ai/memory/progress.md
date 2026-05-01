@@ -9,13 +9,13 @@ Last updated: 2026-04-30
 ## Backend (Laravel 13)
 
 ### Setup
-- [ ] Laravel 13 installed, API-only configured
-- [ ] Docker / Sail configured (port 8000)
+- [x] Laravel 13 installed, API-only configured
+- [x] Docker / Sail configured (port 8000)
 - [ ] `intervention/image` installed
-- [ ] CORS configured for `http://localhost:5173`
+- [x] CORS configured for `http://localhost:5173`
 
 ### Data Layer
-- [ ] `backend/data/campaigns.json` fixture created
+- [x] `backend/data/campaigns.json` fixture created
 - [ ] `CampaignService` singleton implemented (RD1, RD2, RD10)
 - [ ] Registered in `AppServiceProvider` (RA10)
 - [ ] Storage symlink configured, UUID-based naming (RD3, RD4)
