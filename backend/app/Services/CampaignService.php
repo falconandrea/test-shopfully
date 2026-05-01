@@ -50,11 +50,38 @@ class CampaignService
     }
 
     /**
-     * @return array<int, array<string, mixed>>
+     * @param array{status?: int, q?: string, page?: int, limit?: int} $filters
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getCampaigns(): array
+    public function getCampaigns(array $filters = []): \Illuminate\Pagination\LengthAwarePaginator
     {
-        return $this->campaigns;
+        $campaigns = collect($this->campaigns);
+
+        if (isset($filters['status'])) {
+            $campaigns = $campaigns->where('status', (int) $filters['status']);
+        }
+
+        if (isset($filters['q'])) {
+            $query = strtolower((string) $filters['q']);
+            $campaigns = $campaigns->filter(function ($campaign) use ($query) {
+                return str_contains(strtolower((string) $campaign['id']), $query) ||
+                       str_contains(strtolower((string) $campaign['name']), $query);
+            });
+        }
+
+        $total = $campaigns->count();
+        $page = (int) ($filters['page'] ?? 1);
+        $limit = (int) ($filters['limit'] ?? 10);
+
+        $results = $campaigns->forPage($page, $limit)->values();
+
+        return new \Illuminate\Pagination\LengthAwarePaginator(
+            $results,
+            $total,
+            $limit,
+            $page,
+            ['path' => \Illuminate\Support\Facades\Request::url(), 'query' => \Illuminate\Support\Facades\Request::query()]
+        );
     }
 
     public function getCampaign(string $id): ?array

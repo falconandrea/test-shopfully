@@ -17,37 +17,11 @@ class CampaignController extends Controller
      */
     public function index(Request $request)
     {
-        $campaigns = collect($this->campaignService->getCampaigns());
+        $paginatedCampaigns = $this->campaignService->getCampaigns(
+            $request->only(['status', 'q', 'page', 'limit'])
+        );
 
-        // Filter by status
-        if ($request->has('status')) {
-            $status = (int) $request->query('status');
-            $campaigns = $campaigns->where('status', $status);
-        }
-
-        // Filter by q (search by id or name, case-insensitive)
-        if ($request->has('q')) {
-            $query = strtolower($request->query('q'));
-            $campaigns = $campaigns->filter(function ($campaign) use ($query) {
-                return str_contains(strtolower((string) $campaign['id']), $query) ||
-                       str_contains(strtolower((string) $campaign['name']), $query);
-            });
-        }
-
-        $page = (int) $request->query('page', 1);
-        $limit = (int) $request->query('limit', 10);
-        $total = $campaigns->count();
-
-        $results = $campaigns->forPage($page, $limit)->values();
-
-        return CampaignResource::collection($results)->additional([
-            'meta' => [
-                'total' => $total,
-                'page' => $page,
-                'limit' => $limit,
-                'last_page' => (int) ceil($total / $limit),
-            ]
-        ]);
+        return CampaignResource::collection($paginatedCampaigns);
     }
 
     /**
