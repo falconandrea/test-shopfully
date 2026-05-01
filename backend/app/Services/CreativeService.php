@@ -16,9 +16,10 @@ class CreativeService
     private string $creativesFile;
 
     public function __construct(
-        protected CampaignService $campaignService
+        protected CampaignService $campaignService,
+        ?string $creativesFile = null,
     ) {
-        $this->creativesFile = storage_path('app/creatives.json');
+        $this->creativesFile = $creativesFile ?? storage_path('app/creatives.json');
         $this->loadCreatives();
     }
 

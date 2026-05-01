@@ -12,9 +12,9 @@ class CampaignService
 
     private string $campaignsFile;
 
-    public function __construct()
+    public function __construct(?string $campaignsFile = null)
     {
-        $this->campaignsFile = base_path('data/campaigns.json');
+        $this->campaignsFile = $campaignsFile ?? base_path('data/campaigns.json');
 
         $this->loadCampaigns();
     }
