@@ -84,15 +84,15 @@ class CampaignService
         );
     }
 
-    public function getCampaign(string $id): ?array
+    public function getCampaign(int $id): ?array
     {
-        return collect($this->campaigns)->firstWhere('id', $id);
+        return collect($this->campaigns)->first(fn ($c) => $c['id'] === $id);
     }
 
     /**
      * @param array<string, mixed> $data
      */
-    public function updateCampaign(string $id, array $data): ?array
+    public function updateCampaign(int $id, array $data): ?array
     {
         $index = collect($this->campaigns)->search(fn ($c) => $c['id'] === $id);
 

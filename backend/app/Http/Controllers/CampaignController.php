@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateCampaignRequest;
 use App\Http\Resources\CampaignResource;
 use App\Services\CampaignService;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class CampaignController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         $campaign = $this->campaignService->getCampaign($id);
 
@@ -41,9 +42,23 @@ class CampaignController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCampaignRequest $request, int $id)
     {
-        // To be implemented in Task 5
+        // RB6 — id is required in the PUT body and must match the URL parameter.
+        if ($request->input('id') !== $id) {
+            return response()->json([
+                'message' => 'The ID in the body must match the ID in the URL.',
+                'errors' => ['id' => ['Mismatch between URL and body ID.']]
+            ], 422);
+        }
+
+        $campaign = $this->campaignService->updateCampaign($id, $request->validated());
+
+        if (! $campaign) {
+            return response()->json(['message' => 'Campaign not found'], 404);
+        }
+
+        return new CampaignResource($campaign);
     }
 
     /**
