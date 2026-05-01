@@ -10,7 +10,7 @@ description: Session start protocol - read project memory and context, then summ
 
 3. Read `.ai/memory/lessons.md` to recall past mistakes and patterns to avoid.
 
-4. Read `.ai/context/TECH_STACK.md` to have a clear picture of the technology stack and versions in use.
+4. Read `.ai/context/architecture.md` to have a clear picture of the technology stack and versions in use.
 
 6. After reading all the files above, present the user with a concise summary covering:
    - The current project status (from `progress.md`)
