@@ -20,3 +20,6 @@ To populate the JSON data fixture from the original CSV file, you can run the fo
 php artisan app:import-campaigns
 ```
 *(By default, this looks for `campaigns_data_2026.csv` in the project root and generates `backend/data/campaigns.json`)*
+
+## Known Limitations & Future Enhancements
+- **Delete Creative API:** Currently, the system supports uploading up to 3 creatives per campaign. However, there is no API endpoint to delete an existing creative. In a future iteration, a `DELETE /api/creatives/{id}` endpoint should be implemented to prevent campaigns from becoming permanently locked once the limit is reached.
