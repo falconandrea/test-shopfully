@@ -15,21 +15,21 @@ Last updated: 2026-04-30
 
 ### Data Layer
 - [x] `backend/data/campaigns.json` fixture created
-- [ ] `CampaignService` singleton implemented (RD1, RD2, RD10)
-- [ ] Registered in `AppServiceProvider` (RA10)
-- [ ] Storage symlink configured, UUID-based naming (RD3, RD4)
+- [x] `CampaignService` singleton implemented (RD1, RD2, RD10)
+- [x] Registered in `AppServiceProvider` (RA10)
+- [x] Storage symlink configured, UUID-based naming (RD3, RD4)
 
 ### API Endpoints
-- [ ] `GET /api/campaigns` — list + pagination + filters (RA1, RA2)
-- [ ] `GET /api/campaigns/:id` — single campaign (RA3)
-- [ ] `PUT /api/campaigns/:id` — update campaign (RA4)
-- [ ] `GET /api/campaigns/:id/creatives` — list creatives (RA5)
-- [ ] `POST /api/campaigns/:id/creatives` — upload creative (RA6)
+- [x] `GET /api/campaigns` — list + pagination + filters (RA1, RA2)
+- [x] `GET /api/campaigns/:id` — single campaign (RA3)
+- [x] `PUT /api/campaigns/:id` — update campaign (RA4)
+- [x] `GET /api/campaigns/:id/creatives` — list creatives (RA5)
+- [x] `POST /api/campaigns/:id/creatives` — upload creative (RA6)
 
 ### Validation & Resources
-- [ ] Form Requests for campaign update (RB4, RB5, RB6)
-- [ ] Form Request for creative upload (RB1, RB2, RB3)
-- [ ] API Resources for Campaign and Creative (RA7, RA9)
+- [x] Form Requests for campaign update (RB4, RB5, RB6)
+- [x] Form Request for creative upload (RB1, RB2, RB3)
+- [x] API Resources for Campaign and Creative (RA7, RA9)
 
 ### Tests (Pest)
 - [ ] RB1 — paused campaign rejects new creatives
