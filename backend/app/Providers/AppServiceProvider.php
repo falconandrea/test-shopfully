@@ -11,7 +11,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // TODO: Register CampaignService singleton here for the data layer
+        $this->app->singleton(\App\Services\CampaignService::class, function ($app) {
+            return new \App\Services\CampaignService();
+        });
     }
 
     /**
