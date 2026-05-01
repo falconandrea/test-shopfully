@@ -66,7 +66,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 **RB2** — A campaign can have at most 3 creatives. Attempting to add a 4th returns `422 Unprocessable Entity`.
 
-**RB3** — Uploaded creative image must be exactly 320×480 pixels. Validation must check actual pixel dimensions using `intervention/image`, not just MIME type or extension. Returns `422 Unprocessable Entity` if dimensions do not match.
+**RB3** — Uploaded creative image must be exactly 320×480 pixels. Validation must check actual pixel dimensions (e.g. using native Laravel `dimensions` rule). Returns `422 Unprocessable Entity` if dimensions do not match.
 
 **RB4** — `landingUrl` must be a valid URL when provided on campaign update.
 
@@ -88,7 +88,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 **RA5** — `GET /api/campaigns/:id/creatives` returns all creatives for the given campaign. Returns `404` if campaign not found.
 
-**RA6** — `POST /api/campaigns/:id/creatives` uploads a new creative. Accepts `multipart/form-data` with an `asset` file field. Enforces RB1, RB2, RB3. Returns `201 Created` on success.
+**RA6** — `POST /api/campaigns/:id/creatives` uploads a new creative. Accepts either `multipart/form-data` (file upload) or a `base64` encoded string in the `image` field. Enforces RB1, RB2, RB3. Returns `201 Created` on success.
 
 **RA7** — All API responses use a consistent JSON structure. Errors follow the format: `{ "message": "...", "errors": { "field": ["..."] } }`.
 
