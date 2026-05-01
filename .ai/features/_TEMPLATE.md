@@ -1,3 +1,6 @@
+> **Naming convention:** Save feature folders as `YYYY-MM-DD-NNN-feature-name/` (e.g. `2026-05-01-001-backend-api-setup/`).
+> Files inside: `prd-[feature-name].md`, `tasks-[feature-name].md`
+
 # Feature: [Feature Name]
 
 ## Overview
