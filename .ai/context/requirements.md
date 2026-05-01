@@ -88,7 +88,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 **RA5** — `GET /api/campaigns/:id/creatives` returns all creatives for the given campaign. Returns `404` if campaign not found.
 
-**RA6** — `POST /api/campaigns/:id/creatives` uploads a new creative. Accepts `multipart/form-data` with an `asset` file field. Enforces RB1, RB2, RB3. Returns `201 Created` on success.
+**RA6** — `POST /api/campaigns/:id/creatives` uploads a new creative. Accepts either `multipart/form-data` (file upload) or a `base64` encoded string in the `image` field. Enforces RB1, RB2, RB3. Returns `201 Created` on success.
 
 **RA7** — All API responses use a consistent JSON structure. Errors follow the format: `{ "message": "...", "errors": { "field": ["..."] } }`.
 
