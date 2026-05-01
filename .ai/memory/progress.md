@@ -11,7 +11,6 @@ Last updated: 2026-04-30
 ### Setup
 - [x] Laravel 13 installed, API-only configured
 - [x] Docker / Sail configured (port 8000)
-- [ ] `intervention/image` installed
 - [x] CORS configured for `http://localhost:5173`
 
 ### Data Layer

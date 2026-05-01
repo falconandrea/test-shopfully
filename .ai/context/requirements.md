@@ -66,7 +66,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 **RB2** — A campaign can have at most 3 creatives. Attempting to add a 4th returns `422 Unprocessable Entity`.
 
-**RB3** — Uploaded creative image must be exactly 320×480 pixels. Validation must check actual pixel dimensions using `intervention/image`, not just MIME type or extension. Returns `422 Unprocessable Entity` if dimensions do not match.
+**RB3** — Uploaded creative image must be exactly 320×480 pixels. Validation must check actual pixel dimensions (e.g. using native Laravel `dimensions` rule). Returns `422 Unprocessable Entity` if dimensions do not match.
 
 **RB4** — `landingUrl` must be a valid URL when provided on campaign update.
 
