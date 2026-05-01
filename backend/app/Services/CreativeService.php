@@ -100,7 +100,7 @@ class CreativeService
             $extension = $matches[1] ?? 'png';
             $data = base64_decode(substr($file, strpos($file, ',') + 1));
 
-            $filename = 'creatives/'.Str::uuid().'.'.$extension;
+            $filename = 'creatives/' . Str::uuid() . '.' . $extension;
             Storage::disk('public')->put($filename, $data);
             $url = Storage::disk('public')->url($filename);
         }

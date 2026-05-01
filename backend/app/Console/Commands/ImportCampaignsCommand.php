@@ -48,7 +48,7 @@ class ImportCampaignsCommand extends Command
         // Expected header check
         $expectedHeader = ['id', 'name', 'status', 'landingUrl', 'coverImageUrl', 'createdAt'];
         if ($header !== $expectedHeader) {
-            $this->error('Invalid CSV format. Expected: '.implode(';', $expectedHeader));
+            $this->error('Invalid CSV format. Expected: ' . implode(';', $expectedHeader));
 
             return Command::FAILURE;
         }
@@ -58,7 +58,7 @@ class ImportCampaignsCommand extends Command
 
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             if (count($row) !== count($header)) {
-                $this->warn('Skipping row with invalid column count: '.implode(';', $row));
+                $this->warn('Skipping row with invalid column count: ' . implode(';', $row));
 
                 continue;
             }

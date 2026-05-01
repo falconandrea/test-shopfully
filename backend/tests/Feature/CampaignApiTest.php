@@ -9,8 +9,8 @@ use App\Services\CreativeService;
  */
 beforeEach(function () {
     // Create a temp campaigns fixture with known data
-    $this->campaignsFile = tempnam(sys_get_temp_dir(), 'campaigns_').'.json';
-    $this->creativesFile = tempnam(sys_get_temp_dir(), 'creatives_').'.json';
+    $this->campaignsFile = tempnam(sys_get_temp_dir(), 'campaigns_') . '.json';
+    $this->creativesFile = tempnam(sys_get_temp_dir(), 'creatives_') . '.json';
 
     $campaigns = [
         [
