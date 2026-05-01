@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Request;
 
 class CampaignService
 {
@@ -32,10 +33,9 @@ class CampaignService
     }
 
     /**
-     * @param array{status?: int, q?: string, page?: int, limit?: int} $filters
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @param  array{status?: int, q?: string, page?: int, limit?: int}  $filters
      */
-    public function getCampaigns(array $filters = []): \Illuminate\Pagination\LengthAwarePaginator
+    public function getCampaigns(array $filters = []): LengthAwarePaginator
     {
         $campaigns = collect($this->campaigns);
 
@@ -57,12 +57,12 @@ class CampaignService
 
         $results = $campaigns->forPage($page, $limit)->values();
 
-        return new \Illuminate\Pagination\LengthAwarePaginator(
+        return new LengthAwarePaginator(
             $results,
             $total,
             $limit,
             $page,
-            ['path' => \Illuminate\Support\Facades\Request::url(), 'query' => \Illuminate\Support\Facades\Request::query()]
+            ['path' => Request::url(), 'query' => Request::query()]
         );
     }
 
@@ -72,7 +72,7 @@ class CampaignService
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public function updateCampaign(int $id, array $data): ?array
     {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCreativeRequest;
 use App\Http\Resources\CreativeResource;
 use App\Services\CreativeService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CreativeController extends Controller
 {
@@ -30,7 +30,7 @@ class CreativeController extends Controller
     /**
      * Store a newly created creative in storage.
      *
-     * @return \Illuminate\Http\JsonResponse 201
+     * @return JsonResponse 201
      */
     public function store(StoreCreativeRequest $request, int $id)
     {

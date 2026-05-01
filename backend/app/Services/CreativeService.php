@@ -58,7 +58,6 @@ class CreativeService
     }
 
     /**
-     * @param  int  $campaignId
      * @param  UploadedFile|string  $file
      * @return array<string, mixed>
      *

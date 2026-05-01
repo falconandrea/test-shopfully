@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Storage;
 beforeEach(function () {
     Storage::fake('public');
 
-    $this->campaignsFile = tempnam(sys_get_temp_dir(), 'campaigns_') . '.json';
-    $this->creativesFile = tempnam(sys_get_temp_dir(), 'creatives_') . '.json';
+    $this->campaignsFile = tempnam(sys_get_temp_dir(), 'campaigns_').'.json';
+    $this->creativesFile = tempnam(sys_get_temp_dir(), 'creatives_').'.json';
 
     $campaigns = [
         [
@@ -64,7 +64,7 @@ function validCreativeImage(): UploadedFile
     imagepng($img);
     $data = ob_get_clean();
 
-    $tmpPath = tempnam(sys_get_temp_dir(), 'img_') . '.png';
+    $tmpPath = tempnam(sys_get_temp_dir(), 'img_').'.png';
     file_put_contents($tmpPath, $data);
 
     return new UploadedFile($tmpPath, 'creative.png', 'image/png', null, true);
@@ -80,7 +80,7 @@ function validCreativeBase64(): string
     imagepng($img);
     $data = ob_get_clean();
 
-    return 'data:image/png;base64,' . base64_encode($data);
+    return 'data:image/png;base64,'.base64_encode($data);
 }
 
 /**
@@ -93,8 +93,7 @@ function invalidDimensionImage(): UploadedFile
     imagepng($img);
     $data = ob_get_clean();
 
-
-    $tmpPath = tempnam(sys_get_temp_dir(), 'img_') . '.png';
+    $tmpPath = tempnam(sys_get_temp_dir(), 'img_').'.png';
     file_put_contents($tmpPath, $data);
 
     return new UploadedFile($tmpPath, 'bad.png', 'image/png', null, true);
@@ -129,7 +128,7 @@ it('uploads a creative via file to an active campaign', function () {
     $response->assertCreated()
         ->assertJsonStructure(['data' => ['id', 'campaignId', 'assetUrl', 'createdAt']]);
 
-    Storage::disk('public')->assertExists('creatives/' . basename(
+    Storage::disk('public')->assertExists('creatives/'.basename(
         $response->json('data.assetUrl')
     ));
 });
@@ -246,7 +245,7 @@ it('rejects a base64 image with wrong dimensions — RB3', function () {
     imagepng($img);
     $data = ob_get_clean();
 
-    $base64 = 'data:image/png;base64,' . base64_encode($data);
+    $base64 = 'data:image/png;base64,'.base64_encode($data);
 
     $response = $this->postJson('/api/campaigns/1/creatives', [
         'image' => $base64,

@@ -30,6 +30,7 @@ class ImportCampaignsCommand extends Command
 
         if (! File::exists($filePath)) {
             $this->error("The file {$filePath} does not exist.");
+
             return Command::FAILURE;
         }
 
@@ -39,14 +40,16 @@ class ImportCampaignsCommand extends Command
         $header = fgetcsv($file, 0, ';');
 
         if (! $header) {
-            $this->error("Failed to read the CSV header.");
+            $this->error('Failed to read the CSV header.');
+
             return Command::FAILURE;
         }
 
         // Expected header check
         $expectedHeader = ['id', 'name', 'status', 'landingUrl', 'coverImageUrl', 'createdAt'];
         if ($header !== $expectedHeader) {
-            $this->error("Invalid CSV format. Expected: " . implode(';', $expectedHeader));
+            $this->error('Invalid CSV format. Expected: '.implode(';', $expectedHeader));
+
             return Command::FAILURE;
         }
 
@@ -55,19 +58,20 @@ class ImportCampaignsCommand extends Command
 
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             if (count($row) !== count($header)) {
-                $this->warn("Skipping row with invalid column count: " . implode(';', $row));
+                $this->warn('Skipping row with invalid column count: '.implode(';', $row));
+
                 continue;
             }
 
             $data = array_combine($header, $row);
 
             $campaigns[] = [
-                'id'            => (int) $data['id'],
-                'name'          => $data['name'],
-                'status'        => (int) $data['status'],
-                'landingUrl'    => $data['landingUrl'],
+                'id' => (int) $data['id'],
+                'name' => $data['name'],
+                'status' => (int) $data['status'],
+                'landingUrl' => $data['landingUrl'],
                 'coverImageUrl' => $data['coverImageUrl'],
-                'createdAt'     => $data['createdAt'],
+                'createdAt' => $data['createdAt'],
             ];
 
             $count++;

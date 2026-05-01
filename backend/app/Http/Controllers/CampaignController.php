@@ -48,7 +48,7 @@ class CampaignController extends Controller
         if ($request->input('id') !== $id) {
             return response()->json([
                 'message' => 'The ID in the body must match the ID in the URL.',
-                'errors' => ['id' => ['Mismatch between URL and body ID.']]
+                'errors' => ['id' => ['Mismatch between URL and body ID.']],
             ], 422);
         }
 
