@@ -14,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Services\CampaignService::class, function ($app) {
             return new \App\Services\CampaignService();
         });
+
+        $this->app->singleton(\App\Services\CreativeService::class, function ($app) {
+            return new \App\Services\CreativeService($app->make(\App\Services\CampaignService::class));
+        });
     }
 
     /**

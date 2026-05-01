@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\CreativeController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('campaigns')->group(function () {
@@ -14,12 +15,8 @@ Route::prefix('campaigns')->group(function () {
     Route::put('/{id}', [CampaignController::class, 'update']);
 
     // RA5 — List creatives for a campaign
-    Route::get('/{id}/creatives', static function (string $id) {
-        return response()->json([]);
-    });
+    Route::get('/{id}/creatives', [CreativeController::class, 'index']);
 
     // RA6 — Upload a new creative
-    Route::post('/{id}/creatives', static function (string $id) {
-        return response()->json([], 201);
-    });
+    Route::post('/{id}/creatives', [CreativeController::class, 'store']);
 });
