@@ -2,7 +2,7 @@
 
 ## Status: 🚧 In Progress
 
-Last updated: 2026-04-30
+Last updated: 2026-05-01
 
 ---
 
@@ -16,6 +16,7 @@ Last updated: 2026-04-30
 ### Data Layer
 - [x] `backend/data/campaigns.json` fixture created
 - [x] `CampaignService` singleton implemented (RD1, RD2, RD10)
+- [x] `CreativeService` singleton implemented (separation of concerns)
 - [x] Registered in `AppServiceProvider` (RA10)
 - [x] Storage symlink configured, UUID-based naming (RD3, RD4)
 
@@ -24,18 +25,23 @@ Last updated: 2026-04-30
 - [x] `GET /api/campaigns/:id` — single campaign (RA3)
 - [x] `PUT /api/campaigns/:id` — update campaign (RA4)
 - [x] `GET /api/campaigns/:id/creatives` — list creatives (RA5)
-- [x] `POST /api/campaigns/:id/creatives` — upload creative (RA6)
+- [x] `POST /api/campaigns/:id/creatives` — upload creative, file + base64 (RA6)
 
 ### Validation & Resources
 - [x] Form Requests for campaign update (RB4, RB5, RB6)
 - [x] Form Request for creative upload (RB1, RB2, RB3)
+- [x] Custom Rule `CreativeImageRule` for file/base64 validation
 - [x] API Resources for Campaign and Creative (RA7, RA9)
 
-### Tests (Pest)
-- [ ] RB1 — paused campaign rejects new creatives
-- [ ] RB2 — max 3 creatives per campaign
-- [ ] RB3 — image dimensions 320×480 enforced
-- [ ] RB5 — status must be 0 or 1
+### Tests (Pest) — 23 tests, 78 assertions ✅
+- [x] RB1 — paused campaign rejects new creatives
+- [x] RB2 — max 3 creatives per campaign
+- [x] RB3 — image dimensions 320×480 enforced (file + base64)
+- [x] RB5 — status must be 0 or 1
+- [x] RB6 — id mismatch between URL and body
+- [x] RA1-RA3 — campaign listing, filtering, single retrieval
+- [x] RA5-RA6 — creative listing and upload (file + base64)
+- [x] Non-existent campaign returns 404 / 422
 
 ---
 
