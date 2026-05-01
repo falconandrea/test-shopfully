@@ -29,6 +29,8 @@ class CreativeController extends Controller
 
     /**
      * Store a newly created creative in storage.
+     *
+     * @return \Illuminate\Http\JsonResponse 201
      */
     public function store(StoreCreativeRequest $request, int $id)
     {
@@ -39,6 +41,8 @@ class CreativeController extends Controller
             $image
         );
 
-        return new CreativeResource($creative);
+        return (new CreativeResource($creative))
+            ->response()
+            ->setStatusCode(201);
     }
 }

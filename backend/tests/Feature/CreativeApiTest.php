@@ -126,7 +126,7 @@ it('uploads a creative via file to an active campaign', function () {
         'image' => validCreativeImage(),
     ]);
 
-    $response->assertOk()
+    $response->assertCreated()
         ->assertJsonStructure(['data' => ['id', 'campaignId', 'assetUrl', 'createdAt']]);
 
     Storage::disk('public')->assertExists('creatives/' . basename(
@@ -143,7 +143,7 @@ it('uploads a creative via base64 to an active campaign', function () {
         'image' => validCreativeBase64(),
     ]);
 
-    $response->assertOk()
+    $response->assertCreated()
         ->assertJsonStructure(['data' => ['id', 'campaignId', 'assetUrl', 'createdAt']]);
 });
 
@@ -169,7 +169,7 @@ it('rejects the 4th creative upload — RB2', function () {
     for ($i = 0; $i < 3; $i++) {
         $this->postJson('/api/campaigns/1/creatives', [
             'image' => validCreativeImage(),
-        ])->assertOk();
+        ])->assertCreated();
     }
 
     // 4th should fail
