@@ -79,8 +79,13 @@ Last updated: 2026-05-01
 
 ## DevOps
 
-- [ ] Root `docker-compose.yml` starts both services (RO4)
-- [ ] `.env.example` for backend and frontend (RO5)
+- [x] Root `docker-compose.yml` starts both services (RO4)
+- [x] `backend/Dockerfile` — multi-stage (development + production targets)
+- [x] `frontend/Dockerfile` — multi-stage (development + production targets)
+- [x] `.env.example` for backend (RO5) — DB-free, no MySQL/Redis references
+- [x] Sail `compose.yaml` cleaned — removed MySQL, Redis, Meilisearch, Mailpit, Selenium
+- [ ] `.env.example` for frontend (RO5)
+- [ ] `docker-compose.prod.yml` — production override with Traefik + subdomain routing
 - [ ] GitHub Actions workflow on push to `main` (RO2)
 - [ ] Live at `https://test-shopfully.andreafalcon.dev` (RO3)
 - [ ] Branch strategy in place: `feature/*` → `develop` → `main` (RO1)

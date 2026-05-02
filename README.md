@@ -8,14 +8,44 @@ Full-stack monorepo to manage advertising campaigns and their associated creativ
 
 ## Setup & Run
 
+### Docker Compose (recommended)
+
 ```bash
-# Clone the repo and start both services
-docker-compose up -d
+# Start both backend and frontend from the project root
+docker-compose up --build
 ```
 
-The backend is available at `http://localhost:8000` and the frontend at `http://localhost:5173`.
+- Backend API: `http://localhost:8000`
+- Frontend SPA: `http://localhost:5173`
 
-## API Endpoints
+> **Note:** No database or external services are required. All data is stored in JSON files.
+
+### Laravel Sail (backend only)
+
+```bash
+cd backend
+./vendor/bin/sail up
+```
+
+Sail is available for local backend development but is independent from the root `docker-compose.yml`.
+
+### Production (future)
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+Will add Traefik reverse proxy with subdomain routing to `https://test-shopfully.andreafalcon.dev`.
+
+## Testing
+
+```bash
+# Run the backend test suite
+cd backend && php artisan test
+
+# Run with coverage report
+cd backend && php artisan test --coverage
+```
 
 | Method | Endpoint | Description |
 |--------|----------------------------------------------|----------------------------------------------|
@@ -60,15 +90,6 @@ Image must be exactly **320×480 pixels**, in JPEG or PNG format.
 - Campaign `status` must be `0` or `1`.
 - The `id` in the PUT body must match the URL parameter.
 
-## Testing
-
-```bash
-# Run the full test suite
-cd backend && vendor/bin/sail test
-
-# Run with coverage report
-cd backend && vendor/bin/sail test --coverage
-```
 
 ## Custom Commands
 
