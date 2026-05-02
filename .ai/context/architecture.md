@@ -4,7 +4,7 @@
 
 | Layer     | Technology                              |
 |-----------|-----------------------------------------|
-| Backend   | Laravel 13, PHP 8.4, API-only           |
+| Backend   | Laravel 13, PHP 8.5, API-only           |
 | Frontend  | React 19, Vite, TypeScript, Material UI |
 | Container | Docker + Docker Compose                 |
 | Testing   | Pest (backend), Vitest (frontend)       |
