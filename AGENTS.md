@@ -6,7 +6,7 @@ Full-stack monorepo to manage advertising campaigns and their associated creativ
 
 - **Backend:** Laravel 13, API-only — see `backend/AGENTS.md` for Laravel-specific rules
 - **Frontend:** React 19 + Vite + TypeScript + Material UI, SPA
-- **No database** — campaigns loaded from a static JSON fixture; creatives persisted to `storage/app/creatives.json`
+- **No database** — campaigns and creatives are persisted to JSON files in `storage/app/` (ignored by Git); initial data populated via CSV import.
 
 ## Repository Structure
 
