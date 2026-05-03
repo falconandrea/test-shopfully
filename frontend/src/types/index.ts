@@ -25,8 +25,8 @@ export interface Creative {
  */
 export interface PaginationMeta {
   total: number;
-  page: number;
-  limit: number;
+  current_page: number;
+  per_page: number;
   last_page: number;
 }
 
@@ -52,6 +52,8 @@ export interface ApiErrorResponse {
 export interface CampaignFilters {
   q?: string;
   status?: 0 | 1 | '';
+  favouritesOnly?: boolean;
+  ids?: string[];
   page?: number;
   limit?: number;
 }

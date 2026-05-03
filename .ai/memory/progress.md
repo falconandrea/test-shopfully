@@ -55,11 +55,11 @@ Last updated: 2026-05-02
 - [x] Docker configured (port 5173)
 
 ### Pages & Components
-- [ ] Campaign list page `/` (RF1)
-  - [ ] Pagination controls (RF1)
-  - [ ] Filters: id, name, status (RF2)
-  - [ ] Loading / empty / error states (RF3)
-  - [ ] Favourite toggle per campaign (RF4)
+- [x] Campaign list page `/` (RF1) — **completed (2026-05-03-004)**
+  - [x] Pagination controls (RF1)
+  - [x] Filters: id, name, status (RF2)
+  - [x] Loading / empty / error states (RF3)
+  - [x] Favourite toggle per campaign (RF4)
 - [ ] Campaign detail page `/campaigns/:id` (RF5)
   - [ ] Display full campaign info
   - [ ] Inline editing: name, status, landingUrl, coverImageUrl (RF5)
@@ -68,12 +68,13 @@ Last updated: 2026-05-02
   - [ ] Inline 422 error display (RF8)
 
 ### Hooks
-- [ ] `useCampaigns` (RF10)
-- [ ] `useFavourites` — localStorage + cookie fallback (RF4, RF10)
+- [x] `useCampaigns` (RF10)
+- [x] `useFavourites` — localStorage + cookie fallback (RF4, RF10)
 
 ### Tests (Vitest)
-- [ ] `useFavourites` — localStorage path (RT2)
-- [ ] `useFavourites` — cookie fallback path (RT2)
+- [x] `useFavourites` — localStorage path (RT2)
+- [x] `useFavourites` — cookie fallback path (RT2)
+- [x] UI Components — CampaignGrid, CampaignCard, CampaignFilters
 
 ---
 

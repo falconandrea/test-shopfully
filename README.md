@@ -39,12 +39,25 @@ Will add Traefik reverse proxy with subdomain routing to `https://test-shopfully
 
 ## Testing
 
+### Backend (Pest)
 ```bash
 # Run the backend test suite
 cd backend && php artisan test
 
 # Run with coverage report
 cd backend && php artisan test --coverage
+```
+
+### Frontend (Vitest)
+```bash
+# Run the frontend test suite
+cd frontend && npm test
+
+# Run in watch mode (for development)
+cd frontend && npm run test:watch
+
+# Run with coverage report
+cd frontend && npm run test:coverage
 ```
 
 | Method | Endpoint | Description |

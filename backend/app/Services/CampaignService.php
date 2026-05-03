@@ -43,6 +43,10 @@ class CampaignService
             $campaigns = $campaigns->where('status', (int) $filters['status']);
         }
 
+        if (isset($filters['ids']) && is_array($filters['ids'])) {
+            $campaigns = $campaigns->whereIn('id', $filters['ids']);
+        }
+
         if (isset($filters['q'])) {
             $query = strtolower((string) $filters['q']);
             $campaigns = $campaigns->filter(function ($campaign) use ($query) {
