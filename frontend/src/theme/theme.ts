@@ -8,7 +8,7 @@ import { createTheme, alpha } from '@mui/material/styles';
  * Shape: slightly rounded corners (12px default).
  */
 
-const ACCENT = '#6C63FF'; // Electric indigo
+const ACCENT = '#7C74FF'; // Slightly brighter electric indigo for contrast
 const ACCENT_LIGHT = '#9D97FF';
 const BACKGROUND_DEFAULT = '#0B0E14';
 const BACKGROUND_PAPER = '#131720';
@@ -20,11 +20,11 @@ const theme = createTheme({
     primary: {
       main: ACCENT,
       light: ACCENT_LIGHT,
-      dark: '#4A42D4',
+      dark: '#5B54D4',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#FF6B8A',
+      main: '#FF7D99', // Brighter pink for contrast
       light: '#FF8FA8',
       dark: '#D4456A',
     },
@@ -33,22 +33,22 @@ const theme = createTheme({
       paper: BACKGROUND_PAPER,
     },
     success: {
-      main: '#4ADE80',
+      main: '#56E38B', // Brighter green
       dark: '#16A34A',
     },
     warning: {
-      main: '#FBBF24',
+      main: '#FCD34D', // Brighter warning
       dark: '#D97706',
     },
     error: {
-      main: '#F87171',
+      main: '#FCA5A5', // Brighter error
       dark: '#DC2626',
     },
     text: {
-      primary: '#E8EAF0',
-      secondary: '#8B92A5',
+      primary: '#F0F2F7', // Brighter text
+      secondary: '#A5ABB9', // Brighter secondary text for contrast
     },
-    divider: alpha('#8B92A5', 0.12),
+    divider: alpha('#A5ABB9', 0.15),
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica Neue", Arial, sans-serif',
@@ -66,10 +66,10 @@ const theme = createTheme({
     },
     subtitle1: {
       fontWeight: 500,
-      color: '#8B92A5',
+      color: '#A5ABB9',
     },
     body2: {
-      color: '#8B92A5',
+      color: '#A5ABB9',
     },
     button: {
       fontWeight: 600,

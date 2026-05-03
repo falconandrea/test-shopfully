@@ -146,6 +146,6 @@ This project is built as a highly portable, "database-less" prototype. To transi
 
 ### 4. Security & Monitoring
 - **Authentication:** Secure the API using **Laravel Sanctum** (SPA) or **JWT**.
-- **Rate Limiting:** Implement strict rate limiting on the upload endpoint to prevent DoS attacks.
+- **Rate Limiting:** Implement strict rate limiting on the upload endpoint to prevent DoS attacks (see `Phase 2` in `.ai/features/2026-05-03-002-security-hardening/prd-security-hardening.md`).
 - **Observability:** Integrate tools like **Sentry** for error tracking and **Prometheus/Grafana** or **Datadog** for performance monitoring.
 

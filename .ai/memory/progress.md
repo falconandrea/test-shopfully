@@ -70,10 +70,21 @@ Last updated: 2026-05-02
 ### Hooks
 - [x] `useCampaigns` (RF10)
 - [x] `useFavourites` — localStorage + cookie fallback (RF4, RF10)
-
 - [x] `useCampaignDetail` — loading, saving, validation errors
 - [x] `useCreatives` — fetching and uploading
-- [x] UI Components — CampaignGrid, CampaignCard, CampaignFilters, CampaignInfoCard, CreativeUpload, CampaignDetailPage
+
+### Quality & Accessibility
+- [x] Accessibility Remediation (WCAG 2.2 AA) — **completed (2026-05-03-001)**
+  - [x] Zero automated axe-core violations
+  - [x] Semantic HTML landmarks & heading hierarchy
+  - [x] Improved color contrast for dark mode
+  - [x] Aria-live regions for dynamic content
+- [x] Basic Security Check & Auditing — **Phase 1 Complete (2026-05-03-002)**
+  - [x] Security expert skill and audit script
+  - [x] Dependency & secret scanning
+  - [x] Backend config audit (APP_DEBUG check)
+  - [ ] **Phase 2 Hardening (Rate limiting, Security headers) — PENDING**
+- [x] UI Components optimization — CampaignGrid, CampaignCard, CampaignFilters, CampaignInfoCard, CreativeUpload, CampaignDetailPage
 
 ---
 
