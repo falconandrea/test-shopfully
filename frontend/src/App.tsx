@@ -5,11 +5,13 @@ import theme from './theme/theme';
 import Layout from './components/Layout';
 import CampaignListPage from './pages/CampaignListPage';
 import CampaignDetailPage from './pages/CampaignDetailPage';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

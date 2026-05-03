@@ -26,7 +26,7 @@ export function useCreatives(campaignId: string): UseCreativesResult {
 
     getCreatives(campaignId)
       .then((data) => {
-        if (!cancelled) setCreatives(data);
+        if (!cancelled) setCreatives(Array.isArray(data) ? data : []);
       })
       .catch((err) => {
         if (!cancelled) {

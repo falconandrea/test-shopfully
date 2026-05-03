@@ -30,6 +30,9 @@ class CampaignService
     {
         if (File::exists($this->campaignsFile)) {
             $this->campaigns = json_decode(File::get($this->campaignsFile), true) ?? [];
+        } else {
+            $this->campaigns = [];
+            $this->saveCampaigns(); // Create the file if it doesn't exist
         }
     }
 

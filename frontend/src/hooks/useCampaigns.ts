@@ -46,8 +46,8 @@ export function useCampaigns(filters: CampaignFilters): UseCampaignsResult {
       .get<PaginatedResponse<Campaign>>('/campaigns', { params })
       .then((res) => {
         if (!cancelled) {
-          setCampaigns(res.data.data);
-          setMeta(res.data.meta);
+          setCampaigns(res.data?.data || []);
+          setMeta(res.data?.meta || null);
         }
       })
       .catch((err) => {

@@ -12,7 +12,7 @@ services:
       - .env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.shopfully-backend.rule=Host(`test-shopfully.andreafalcon.dev`) && PathPrefix(`/api`, `/storage`)"
+      - "traefik.http.routers.shopfully-backend.rule=Host(`test-shopfully.andreafalcon.dev`) && PathPrefix(`/api`, `/storage`, `/up`)"
       - "traefik.http.routers.shopfully-backend.entrypoints=https"
       - "traefik.http.routers.shopfully-backend.tls=true"
       - "traefik.http.routers.shopfully-backend.tls.certresolver=letsencrypt"

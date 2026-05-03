@@ -35,7 +35,7 @@ export function useCampaignDetail(id: string): UseCampaignDetailResult {
 
     getCampaign(id)
       .then((data) => {
-        if (!cancelled) setCampaign(data);
+        if (!cancelled) setCampaign(data || null);
       })
       .catch((err) => {
         if (!cancelled) {
