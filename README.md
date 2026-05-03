@@ -12,7 +12,7 @@ Full-stack monorepo to manage advertising campaigns and their associated creativ
 
 ```bash
 # Start both backend and frontend from the project root
-docker-compose up --build
+docker compose up --build
 ```
 
 - Backend API: `http://localhost:8000`
@@ -30,13 +30,19 @@ cd backend
 
 Sail is available for local backend development but is independent from the root `docker-compose.yml`.
 
-### Production (future)
+### Production Deployment
+
+The project is configured for automated deployment via GitHub Actions.
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# Production setup on the VPS
+cd server
+./deploy.sh
 ```
 
-Will add Traefik reverse proxy with subdomain routing to `https://test-shopfully.andreafalcon.dev`.
+Uses **Traefik** as a reverse proxy for path-based routing on `https://test-shopfully.andreafalcon.dev`.
+- Backend (API & Storage): `/api`, `/storage`
+- Frontend (SPA): `/` (root)
 
 ## Testing
 
@@ -115,9 +121,9 @@ To populate the JSON data fixture from the original CSV file, you can run the fo
 php artisan app:import-campaigns
 
 # Or via Docker
-docker-compose exec backend php artisan app:import-campaigns
+docker compose exec backend php artisan app:import-campaigns
 ```
-*(This command populates `backend/storage/app/campaigns.json`. By default, it looks for `campaigns_data_2026.csv` in the project root)*
+*(This command populates `backend/storage/app/campaigns.json`. It is persistence-aware and handles numeric IDs)*
 
 ## Known Limitations & Future Enhancements
 - **Delete Creative API:** Currently, the system supports uploading up to 3 creatives per campaign. However, there is no API endpoint to delete an existing creative. In a future iteration, a `DELETE /api/creatives/{id}` endpoint should be implemented to prevent campaigns from becoming permanently locked once the limit is reached.

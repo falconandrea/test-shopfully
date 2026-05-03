@@ -57,13 +57,20 @@ Both `backend/Dockerfile` and `frontend/Dockerfile` use multi-stage builds with 
 - **development** — includes dev dependencies, source-mounted volumes for hot-reload
 - **production** — optimised images with `--no-dev`, autoloader optimisation, static builds
 
-### Compose Strategy
 | File | Purpose | Usage |
 |------|---------|-------|
-| `docker-compose.yml` (root) | Dev environment — both services | `docker-compose up --build` |
-| `docker-compose.prod.yml` | Production override — Traefik, subdomains | `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d` |
+| `docker-compose.yml` (root) | Dev environment — both services | `docker compose up --build` |
+| `server/docker-compose.yml` | Prod base — lightweight service defs | Part of production deploy |
+| `server/docker-compose.prod.yml` | Prod override — Traefik, GHCR images | `docker compose -f ... up -d` |
 | `backend/compose.yaml` | Sail local dev (backend only) | `cd backend && sail up` |
 
-### Production Domain
-- App: `https://test-shopfully.andreafalcon.dev`
-- API: `https://test-shopfully.andreafalcon.dev/api` (same origin, proxied by Traefik)
+### CI/CD Pipeline
+- **Tests**: Automated Pest (backend) and Vitest (frontend) on push to `main`.
+- **Registry**: Docker images built and pushed to GitHub Container Registry (GHCR).
+- **Deploy**: Automated SSH deployment copies `server/` files and restarts containers on the VPS.
+
+### Production Routing (Traefik)
+- **Frontend (SPA)**: `https://test-shopfully.andreafalcon.dev` (Priority: low)
+- **Backend (API)**: `https://test-shopfully.andreafalcon.dev/api` (Priority: high)
+- **Storage**: `https://test-shopfully.andreafalcon.dev/storage` (Priority: high)
+- **Same-Origin**: Both layers share the same host, avoiding CORS issues in production.
