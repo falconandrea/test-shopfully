@@ -19,7 +19,7 @@ class CampaignController extends Controller
     public function index(Request $request)
     {
         $paginatedCampaigns = $this->campaignService->getCampaigns(
-            $request->only(['status', 'q', 'page', 'limit'])
+            $request->only(['status', 'q', 'page', 'limit', 'ids'])
         );
 
         return CampaignResource::collection($paginatedCampaigns);
