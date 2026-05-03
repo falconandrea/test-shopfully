@@ -68,7 +68,12 @@ export function useCampaignDetail(id: string): UseCampaignDetailResult {
           const body = err.response.data as ApiErrorResponse;
           setValidationErrors(body.errors || {});
         } else {
-          setError(err?.response?.data?.message || err.message || 'Failed to update campaign');
+          if (axios.isAxiosError(err)) {
+            const errorData = err.response?.data as ApiErrorResponse | undefined;
+            setError(errorData?.message || 'Failed to update campaign. Please try again.');
+          } else {
+            setError('An unexpected error occurred.');
+          }
         }
         return false;
       } finally {

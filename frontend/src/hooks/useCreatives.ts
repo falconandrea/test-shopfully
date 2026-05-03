@@ -30,7 +30,12 @@ export function useCreatives(campaignId: string): UseCreativesResult {
       })
       .catch((err) => {
         if (!cancelled) {
-          setError(err?.response?.data?.message || err.message || 'Failed to load creatives');
+          if (axios.isAxiosError(err)) {
+        const errorData = err.response?.data as ApiErrorResponse | undefined;
+        setError(errorData?.message || 'Failed to upload creative. Please try again.');
+      } else {
+        setError('An unexpected error occurred.');
+      }
         }
       })
       .finally(() => {
@@ -59,7 +64,11 @@ export function useCreatives(campaignId: string): UseCreativesResult {
           const body = err.response.data as ApiErrorResponse;
           setValidationErrors(body.errors || {});
         } else {
-          setValidationErrors({ image: [err?.response?.data?.message || err.message || 'Upload failed'] });
+          let message = 'Upload failed';
+          if (axios.isAxiosError(err)) {
+            message = err.response?.data?.message || err.message || message;
+          }
+          setValidationErrors({ image: [message] });
         }
         return false;
       } finally {
