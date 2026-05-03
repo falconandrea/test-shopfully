@@ -27,6 +27,9 @@ class CreativeService
     {
         if (File::exists($this->creativesFile)) {
             $this->creatives = json_decode(File::get($this->creativesFile), true) ?? [];
+        } else {
+            $this->creatives = [];
+            $this->saveCreatives(); // Create the file if it doesn't exist
         }
     }
 
