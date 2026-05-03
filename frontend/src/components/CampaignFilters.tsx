@@ -116,9 +116,11 @@ export default function CampaignFiltersBar({ filters, onFilterChange }: Campaign
         value={filters.status === undefined ? '' : String(filters.status)}
         onChange={handleStatusChange}
         sx={{ minWidth: 160 }}
-        SelectProps={{
-          displayEmpty: true,
-          inputProps: { 'aria-label': 'Filter by status' },
+        slotProps={{
+          select: {
+            displayEmpty: true,
+            inputProps: { 'aria-label': 'Filter by status' },
+          },
         }}
       >
         {STATUS_OPTIONS.map((opt) => (
