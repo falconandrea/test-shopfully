@@ -4,18 +4,24 @@ import { getCookie, setCookie } from '../utils/cookies';
 const STORAGE_KEY = 'campaign_favourites';
 const COOKIE_EXPIRY_DAYS = 365;
 
+let localStorageAvailable: boolean | null = null;
+
 /**
  * Detect whether localStorage is available and working.
  */
 function isLocalStorageAvailable(): boolean {
+  if (localStorageAvailable !== null) {
+    return localStorageAvailable;
+  }
   try {
     const key = '__ls_test__';
     localStorage.setItem(key, '1');
     localStorage.removeItem(key);
-    return true;
+    localStorageAvailable = true;
   } catch {
-    return false;
+    localStorageAvailable = false;
   }
+  return localStorageAvailable;
 }
 
 /**

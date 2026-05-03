@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -38,6 +38,18 @@ export default function CampaignFiltersBar({ filters, onFilterChange }: Campaign
       }, 300),
     [onFilterChange],
   );
+
+  // Sync local searchValue if filters.q changes externally
+  useEffect(() => {
+    setSearchValue(filters.q ?? '');
+  }, [filters.q]);
+
+  // Clean up debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

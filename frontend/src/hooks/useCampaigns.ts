@@ -62,7 +62,7 @@ export function useCampaigns(filters: CampaignFilters): UseCampaignsResult {
     return () => {
       cancelled = true;
     };
-  }, [JSON.stringify(filters), retryCount]);
+  }, [filters.q, filters.status, filters.ids?.join(','), filters.page, filters.limit, retryCount]);
 
   return { campaigns, meta, loading, error, refetch };
 }
