@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# Campaign Manager — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Campaign Manager, built with **React 19**, **TypeScript**, **Vite**, and **Material UI**.
 
-Currently, two official plugins are available:
+## Setup & Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Normally, you should run the entire stack from the root directory using Docker Compose (`docker-compose up --build`). However, if you need to run the frontend standalone or install packages:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application will be available at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `npm run dev`: Starts the local Vite development server
+- `npm run build`: Compiles TypeScript and builds the production bundle
+- `npm run preview`: Locally previews the production build
+- `npm run lint`: Runs ESLint to check for code quality issues
+
+## Testing
+
+This project uses **Vitest** and **React Testing Library** for unit and component testing.
+
+```bash
+# Run the test suite once
+npm test
+
+# Run tests in watch mode (recommended during development)
+npm run test:watch
+
+# Generate a coverage report (v8)
+npm run test:coverage
 ```
+
+## Structure
+
+- `src/components/`: Reusable UI components (Cards, Grids, Filters)
+- `src/hooks/`: Custom React hooks (`useCampaigns`, `useFavourites`)
+- `src/pages/`: Main application views
+- `src/services/`: API clients (Axios)
+- `src/types/`: TypeScript interfaces and definitions
+- `src/utils/`: Helper functions
+- `src/__tests__/`: Unit and component test suites
