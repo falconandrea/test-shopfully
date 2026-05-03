@@ -78,9 +78,9 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 ## RA — API Backend
 
-**RA1** — `GET /api/campaigns` returns a paginated list of campaigns with support for query parameters: `status` (0 or 1), `q` (search by id or name, case-insensitive), `page` (default 1), `limit` (default 10).
+**RA1** — `GET /api/campaigns` returns a paginated list of campaigns with support for query parameters: `status` (0 or 1), `q` (search by id or name, case-insensitive), `page` (default 1), `limit` (default 10), and `ids` (array of campaign IDs to filter by).
 
-**RA2** — `GET /api/campaigns` response includes a `meta` object: `{ total, page, limit, last_page }`.
+**RA2** — `GET /api/campaigns` response includes a `meta` object: `{ total, current_page, per_page, last_page }`.
 
 **RA3** — `GET /api/campaigns/:id` returns a single campaign. Returns `404` if not found.
 
