@@ -1,0 +1,24 @@
+# Campaign Manager — Production Base
+# Note: This is the base file used on the VPS. 
+# Environment variables are managed via .env file or production override.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      target: production
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      target: production
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

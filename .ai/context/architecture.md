@@ -1,0 +1,76 @@
+# Campaign Manager — Architecture Decisions
+
+## Stack
+
+| Layer     | Technology                              |
+|-----------|-----------------------------------------|
+| Backend   | Laravel 13, PHP 8.5, API-only           |
+| Frontend  | React 19, Vite, TypeScript, Material UI |
+| Container | Docker + Docker Compose                 |
+| Testing   | Pest (backend), Vitest (frontend)       |
+| CI/CD     | GitHub Actions → VPS                    |
+
+## Key Architectural Decisions
+
+### No Database
+Campaigns and creatives are persisted to JSON files in `backend/storage/app/` (`campaigns.json` and `creatives.json`). These files are loaded into a singleton `CampaignService` at boot. While `creatives.json` is updated on every upload, `campaigns.json` can be populated via a CSV import command or migrated from an initial fixture. Both runtime files are ignored by Git, and the Docker volume ensures data persistence across container restarts. No ORM or database engine is involved.
+
+### CampaignService as Singleton
+Registered in `AppServiceProvider`. Holds all in-memory state (campaigns + creatives). All controllers depend on it via dependency injection.
+
+### API-Only Backend
+No Blade, no session, no Sanctum. Pure JSON API. All responses use Laravel API Resources. All validation uses Form Requests.
+
+### No Eloquent
+No ORM, no migrations, no models in the Eloquent sense. Data is plain PHP arrays/objects hydrated from JSON.
+
+### Frontend as Separate SPA
+React app runs independently (port 5173). Communicates with the backend via a centralised Axios instance (`src/services/api.ts`). React Router handles client-side routing.
+
+## Port Mapping
+
+| Service  | Port |
+|----------|------|
+| Backend  | 8000 |
+| Frontend | 5173 |
+
+## CORS
+Backend allows `http://localhost:5173` in development. Locked to known origins in production.
+
+## File Storage
+Creative images stored at `storage/app/public/creatives/` with UUID-based filenames. Served via `/storage/creatives/<filename>` symlink. Docker volume persists files across container restarts.
+
+## Favourite Campaigns (Client-Side)
+Stored in `localStorage` with cookie fallback. No backend involvement. Managed via `useFavourites` custom hook.
+
+## Validation Strategy
+- **Client-side:** image dimensions checked before upload (RF7), inline error display from 422 responses (RF8)
+- **Server-side:** all business rules enforced regardless of client (RS1), using Form Requests + `intervention/image` for pixel validation (RB3)
+
+## Docker Architecture
+
+### No Database in Containers
+The project does not use any database service (MySQL, Redis, etc.). The `backend/compose.yaml` (Sail) and root `docker-compose.yml` contain only the application services. All data comes from JSON files.
+
+### Multi-Stage Dockerfiles
+Both `backend/Dockerfile` and `frontend/Dockerfile` use multi-stage builds with `development` and `production` targets:
+- **development** — includes dev dependencies, source-mounted volumes for hot-reload
+- **production** — optimised images with `--no-dev`, autoloader optimisation, static builds
+
+| File | Purpose | Usage |
+|------|---------|-------|
+| `docker-compose.yml` (root) | Dev environment — both services | `docker compose up --build` |
+| `server/docker-compose.yml` | Prod base — lightweight service defs | Part of production deploy |
+| `server/docker-compose.prod.yml` | Prod override — Traefik, GHCR images | `docker compose -f ... up -d` |
+| `backend/compose.yaml` | Sail local dev (backend only) | `cd backend && sail up` |
+
+### CI/CD Pipeline
+- **Tests**: Automated Pest (backend) and Vitest (frontend) on push to `main`.
+- **Registry**: Docker images built and pushed to GitHub Container Registry (GHCR).
+- **Deploy**: Automated SSH deployment copies `server/` files and restarts containers on the VPS.
+
+### Production Routing (Traefik)
+- **Frontend (SPA)**: `https://test-shopfully.andreafalcon.dev` (Priority: low)
+- **Backend (API)**: `https://test-shopfully.andreafalcon.dev/api` (Priority: high)
+- **Storage**: `https://test-shopfully.andreafalcon.dev/storage` (Priority: high)
+- **Same-Origin**: Both layers share the same host, avoiding CORS issues in production.
