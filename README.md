@@ -127,3 +127,25 @@ docker compose exec backend php artisan app:import-campaigns
 
 ## Known Limitations & Future Enhancements
 - **Delete Creative API:** Currently, the system supports uploading up to 3 creatives per campaign. However, there is no API endpoint to delete an existing creative. In a future iteration, a `DELETE /api/creatives/{id}` endpoint should be implemented to prevent campaigns from becoming permanently locked once the limit is reached.
+
+## Performance & Production Considerations
+
+This project is built as a highly portable, "database-less" prototype. To transition this to a production-grade enterprise application, the following architectural changes are recommended:
+
+### 1. Persistence Layer
+- **Relational Database:** Replace the JSON-based storage with a robust RDBMS like **PostgreSQL** or **MySQL**. This would provide ACID (Atomicity, Consistency, Isolation, Durability) compliance, better handling of concurrent writes, and efficient indexing for filtering and search.
+- **Eloquent ORM:** Transitioning to Eloquent would allow using **Route Model Binding**, which simplifies controllers and improves error handling consistency.
+
+### 2. Scalability & Media Management
+- **Cloud Storage:** Currently, creatives are stored locally. In production, these should be moved to an Object Storage service like **AWS S3** or **Google Cloud Storage**. This allows the application to be stateless and scale horizontally across multiple containers.
+- **CDN Integration:** Serve assets via a CDN (like CloudFront or Cloudflare) to reduce latency and offload traffic from the application server.
+
+### 3. Performance Optimizations
+- **Server-side Caching:** Use **Redis** to cache frequently accessed campaign lists and detail views, significantly reducing I/O operations.
+- **Image Processing:** Implement a worker-based image optimization pipeline (using Laravel Queue + Spatie Media Library or similar) to generate responsive variants of uploaded creatives.
+
+### 4. Security & Monitoring
+- **Authentication:** Secure the API using **Laravel Sanctum** (SPA) or **JWT**.
+- **Rate Limiting:** Implement strict rate limiting on the upload endpoint to prevent DoS attacks.
+- **Observability:** Integrate tools like **Sentry** for error tracking and **Prometheus/Grafana** or **Datadog** for performance monitoring.
+
