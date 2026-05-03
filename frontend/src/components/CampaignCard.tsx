@@ -17,7 +17,7 @@ import type { Campaign } from '../types';
 interface CampaignCardProps {
   campaign: Campaign;
   isFavourite: boolean;
-  onToggleFavourite: (id: string) => void;
+  onToggleFavourite: (id: number) => void;
 }
 
 /**

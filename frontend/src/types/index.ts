@@ -2,7 +2,7 @@
  * Campaign model — mirrors the backend Campaign resource.
  */
 export interface Campaign {
-  id: string;
+  id: number;
   name: string;
   status: 0 | 1;
   landingUrl: string;
@@ -15,7 +15,7 @@ export interface Campaign {
  */
 export interface Creative {
   id: string;
-  campaignId: string;
+  campaignId: number;
   assetUrl: string;
   createdAt: string;
 }
@@ -53,7 +53,7 @@ export interface CampaignFilters {
   q?: string;
   status?: 0 | 1 | '';
   favouritesOnly?: boolean;
-  ids?: string[];
+  ids?: number[];
   page?: number;
   limit?: number;
 }

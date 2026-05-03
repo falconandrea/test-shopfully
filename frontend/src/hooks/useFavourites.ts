@@ -27,7 +27,7 @@ function isLocalStorageAvailable(): boolean {
 /**
  * Read favourite IDs from the best available storage.
  */
-function readFavourites(): string[] {
+function readFavourites(): number[] {
   try {
     if (isLocalStorageAvailable()) {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -51,7 +51,7 @@ function readFavourites(): string[] {
 /**
  * Write favourite IDs to the best available storage.
  */
-function writeFavourites(ids: string[]): void {
+function writeFavourites(ids: number[]): void {
   const json = JSON.stringify(ids);
   try {
     if (isLocalStorageAvailable()) {
@@ -71,14 +71,14 @@ function writeFavourites(ids: string[]): void {
  * Returns the current list plus helpers to query and toggle.
  */
 export function useFavourites() {
-  const [favourites, setFavourites] = useState<string[]>(readFavourites);
+  const [favourites, setFavourites] = useState<number[]>(readFavourites);
 
   const isFavourite = useCallback(
-    (id: string) => favourites.includes(id),
+    (id: number) => favourites.includes(id),
     [favourites],
   );
 
-  const toggleFavourite = useCallback((id: string) => {
+  const toggleFavourite = useCallback((id: number) => {
     setFavourites((prev) => {
       const next = prev.includes(id)
         ? prev.filter((fav) => fav !== id)

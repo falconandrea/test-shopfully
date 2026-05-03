@@ -17,57 +17,57 @@ describe('useFavourites', () => {
   });
 
   it('reads initial state from localStorage', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(['c1', 'c2']));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([1, 2]));
     const { result } = renderHook(() => useFavourites());
-    expect(result.current.favourites).toEqual(['c1', 'c2']);
+    expect(result.current.favourites).toEqual([1, 2]);
   });
 
   it('adds a favourite when toggled on', () => {
     const { result } = renderHook(() => useFavourites());
 
     act(() => {
-      result.current.toggleFavourite('abc');
+      result.current.toggleFavourite(123);
     });
 
-    expect(result.current.favourites).toContain('abc');
-    expect(result.current.isFavourite('abc')).toBe(true);
+    expect(result.current.favourites).toContain(123);
+    expect(result.current.isFavourite(123)).toBe(true);
   });
 
   it('removes a favourite when toggled off', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(['abc']));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([123]));
     const { result } = renderHook(() => useFavourites());
 
     act(() => {
-      result.current.toggleFavourite('abc');
+      result.current.toggleFavourite(123);
     });
 
-    expect(result.current.favourites).not.toContain('abc');
-    expect(result.current.isFavourite('abc')).toBe(false);
+    expect(result.current.favourites).not.toContain(123);
+    expect(result.current.isFavourite(123)).toBe(false);
   });
 
   it('toggle switches state back and forth', () => {
     const { result } = renderHook(() => useFavourites());
 
-    act(() => result.current.toggleFavourite('x'));
-    expect(result.current.isFavourite('x')).toBe(true);
+    act(() => result.current.toggleFavourite(99));
+    expect(result.current.isFavourite(99)).toBe(true);
 
-    act(() => result.current.toggleFavourite('x'));
-    expect(result.current.isFavourite('x')).toBe(false);
+    act(() => result.current.toggleFavourite(99));
+    expect(result.current.isFavourite(99)).toBe(false);
 
-    act(() => result.current.toggleFavourite('x'));
-    expect(result.current.isFavourite('x')).toBe(true);
+    act(() => result.current.toggleFavourite(99));
+    expect(result.current.isFavourite(99)).toBe(true);
   });
 
   it('persists favourites to localStorage', () => {
     const { result } = renderHook(() => useFavourites());
 
     act(() => {
-      result.current.toggleFavourite('c1');
-      result.current.toggleFavourite('c2');
+      result.current.toggleFavourite(1);
+      result.current.toggleFavourite(2);
     });
 
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)!);
-    expect(stored).toEqual(expect.arrayContaining(['c1', 'c2']));
+    expect(stored).toEqual(expect.arrayContaining([1, 2]));
   });
 
   it('falls back to cookies when localStorage throws', () => {
@@ -89,10 +89,10 @@ describe('useFavourites', () => {
     const { result } = renderHook(() => useFavourites());
 
     act(() => {
-      result.current.toggleFavourite('cookie-fav');
+      result.current.toggleFavourite(555);
     });
 
-    expect(result.current.isFavourite('cookie-fav')).toBe(true);
+    expect(result.current.isFavourite(555)).toBe(true);
 
     // Verify it was written to a cookie
     expect(document.cookie).toContain(STORAGE_KEY);
