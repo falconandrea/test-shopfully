@@ -72,6 +72,7 @@ export default function CreativeUpload({
           onChange={handleFileChange}
           style={{ display: 'none' }}
           disabled={uploading || disabled}
+          data-testid="creative-file-input"
         />
 
         <Button
