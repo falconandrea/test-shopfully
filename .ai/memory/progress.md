@@ -84,7 +84,7 @@ Last updated: 2026-05-02
 - [x] `frontend/Dockerfile` — multi-stage (development + production targets)
 - [x] `.env.example` for backend (RO5) — DB-free, no MySQL/Redis references
 - [x] Sail `compose.yaml` cleaned — removed MySQL, Redis, Meilisearch, Mailpit, Selenium
-- [ ] `.env.example` for frontend (RO5)
+- [x] `.env.example` for frontend (RO5)
 - [ ] `docker-compose.prod.yml` — production override with Traefik + subdomain routing
 - [ ] GitHub Actions workflow on push to `main` (RO2)
 - [ ] Live at `https://test-shopfully.andreafalcon.dev` (RO3)
