@@ -9,9 +9,9 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/utils/cookies.ts`, `src/utils/debounce.ts`
 
-- [ ] Create `getCookie(name): string | null` and `setCookie(name, value, days)` helpers
-- [ ] Create `debounce<T>(fn, ms): (...args) => void` utility
-- [ ] Both pure functions, no React dependency
+- [x] Create `getCookie(name): string | null` and `setCookie(name, value, days)` helpers
+- [x] Create `debounce<T>(fn, ms): (...args) => void` utility
+- [x] Both pure functions, no React dependency
 
 **Depends on:** nothing
 
@@ -21,10 +21,10 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/hooks/useFavourites.ts`
 
-- [ ] Read/write favourite campaign IDs from `localStorage` (key: `campaign_favourites`)
-- [ ] Detect `localStorage` unavailability (try/catch) → fallback to cookie helpers
-- [ ] Expose: `favourites: string[]`, `isFavourite(id): boolean`, `toggleFavourite(id): void`
-- [ ] Use `useState` + sync to storage on every toggle
+- [x] Read/write favourite campaign IDs from `localStorage` (key: `campaign_favourites`)
+- [x] Detect `localStorage` unavailability (try/catch) → fallback to cookie helpers
+- [x] Expose: `favourites: string[]`, `isFavourite(id): boolean`, `toggleFavourite(id): void`
+- [x] Use `useState` + sync to storage on every toggle
 
 **Depends on:** Task 1
 
@@ -34,13 +34,13 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/__tests__/useFavourites.test.ts`
 
-- [ ] Setup Vitest + `@testing-library/react` (if not already installed)
-- [ ] Test: add favourite → appears in list
-- [ ] Test: remove favourite → disappears from list
-- [ ] Test: toggle → switches state
-- [ ] Test: persists to localStorage
-- [ ] Test: when localStorage throws → falls back to cookie
-- [ ] Test: reads initial state from storage on mount
+- [x] Setup Vitest + `@testing-library/react` (if not already installed)
+- [x] Test: add favourite → appears in list
+- [x] Test: remove favourite → disappears from list
+- [x] Test: toggle → switches state
+- [x] Test: persists to localStorage
+- [x] Test: when localStorage throws → falls back to cookie
+- [x] Test: reads initial state from storage on mount
 
 **Depends on:** Task 2
 
@@ -50,11 +50,11 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/hooks/useCampaigns.ts`
 
-- [ ] Accept `CampaignFilters` as parameter
-- [ ] Call `GET /api/campaigns` via Axios instance with query params
-- [ ] Manage state: `data: Campaign[]`, `meta: PaginationMeta | null`, `loading: boolean`, `error: string | null`
-- [ ] Re-fetch when filters change (use `useEffect` with filter deps)
-- [ ] Expose `refetch()` for retry on error
+- [x] Accept `CampaignFilters` as parameter
+- [x] Call `GET /api/campaigns` via Axios instance with query params
+- [x] Manage state: `data: Campaign[]`, `meta: PaginationMeta | null`, `loading: boolean`, `error: string | null`
+- [x] Re-fetch when filters change (use `useEffect` with filter deps)
+- [x] Expose `refetch()` for retry on error
 
 **Depends on:** nothing (uses existing `api.ts` and types)
 
@@ -64,8 +64,8 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/components/EmptyState.tsx`
 
-- [ ] Reusable component: accepts `title`, `description`, optional `icon`
-- [ ] Centred layout with muted colours, consistent with dark theme
+- [x] Reusable component: accepts `title`, `description`, optional `icon`
+- [x] Centred layout with muted colours, consistent with dark theme
 
 **Depends on:** nothing
 
@@ -75,11 +75,11 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/components/CampaignCard.tsx`
 
-- [ ] Props: `campaign: Campaign`, `isFavourite: boolean`, `onToggleFavourite: (id) => void`
-- [ ] Cover image at top (fallback if URL broken), truncated name, status chip, date
-- [ ] Favourite heart icon (outlined/filled) with scale animation
-- [ ] Click card → navigate to `/campaigns/:id`
-- [ ] Use theme's card styling (glassmorphic, hover glow)
+- [x] Props: `campaign: Campaign`, `isFavourite: boolean`, `onToggleFavourite: (id) => void`
+- [x] Cover image at top (fallback if URL broken), truncated name, status chip, date
+- [x] Favourite heart icon (outlined/filled) with scale animation
+- [x] Click card → navigate to `/campaigns/:id`
+- [x] Use theme's card styling (glassmorphic, hover glow)
 
 **Depends on:** nothing
 
@@ -89,10 +89,10 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/components/CampaignFilters.tsx`
 
-- [ ] Search `TextField` bound to `q` filter (debounced 300ms)
-- [ ] Status `Select` (All / Active / Paused)
-- [ ] Calls `onFilterChange(filters)` callback on change
-- [ ] Resets page to 1 on any filter change
+- [x] Search `TextField` bound to `q` filter (debounced 300ms)
+- [x] Status `Select` (All / Active / Paused)
+- [x] Calls `onFilterChange(filters)` callback on change
+- [x] Resets page to 1 on any filter change
 
 **Depends on:** Task 1 (debounce)
 
@@ -102,10 +102,10 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/components/CampaignGrid.tsx`
 
-- [ ] Responsive MUI `Grid` layout: xs=12, sm=6, md=4
-- [ ] Renders `CampaignCard` for each campaign
-- [ ] Pagination controls below: Previous / Next buttons + "Page X of Y"
-- [ ] Skeleton loading state (6–12 skeleton cards)
+- [x] Responsive MUI `Grid` layout: xs=12, sm=6, md=4
+- [x] Renders `CampaignCard` for each campaign
+- [x] Pagination controls below: Previous / Next buttons + "Page X of Y"
+- [x] Skeleton loading state (6–12 skeleton cards)
 
 **Depends on:** Task 6
 
@@ -115,11 +115,11 @@ PRD: `prd-campaign-list-page.md`
 
 **Files:** `src/pages/CampaignListPage.tsx` (MODIFY — replace placeholder)
 
-- [ ] Wire `useCampaigns` + `useFavourites` hooks
-- [ ] Render `CampaignFilters` at top
-- [ ] Render `CampaignGrid` with data, or `EmptyState` when no results
-- [ ] Render error `Alert` with retry button on error
-- [ ] Page title "Campaigns" with subtitle
+- [x] Wire `useCampaigns` + `useFavourites` hooks
+- [x] Render `CampaignFilters` at top
+- [x] Render `CampaignGrid` with data, or `EmptyState` when no results
+- [x] Render error `Alert` with retry button on error
+- [x] Page title "Campaigns" with subtitle
 
 **Depends on:** Tasks 2, 4, 5, 7, 8
 
@@ -127,13 +127,13 @@ PRD: `prd-campaign-list-page.md`
 
 ## Task 10 — Visual QA & polish
 
-- [ ] Start dev server, verify full flow against backend
-- [ ] Check responsive breakpoints (mobile, tablet, desktop)
-- [ ] Verify skeleton loading appears during fetch
-- [ ] Verify empty state when filters match nothing
-- [ ] Verify error state when backend is down
-- [ ] Verify favourite toggle persists across page reload
-- [ ] Check hover animations, transitions, theme consistency
+- [x] Start dev server, verify full flow against backend
+- [x] Check responsive breakpoints (mobile, tablet, desktop)
+- [x] Verify skeleton loading appears during fetch
+- [x] Verify empty state when filters match nothing
+- [x] Verify error state when backend is down
+- [x] Verify favourite toggle persists across page reload
+- [x] Check hover animations, transitions, theme consistency
 
 **Depends on:** Task 9
 
