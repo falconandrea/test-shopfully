@@ -1,30 +1,58 @@
 # Campaign Manager — Production
-# Usage: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 services:
   backend:
+    # Use the image built by GitHub Actions instead of local build
+    image: ghcr.io/falconandrea/test-shopfully-backend:latest
     build:
+      context: ./backend
       target: production
     volumes:
-      # Omit the host code mount so the built image code is used.
-      # Only mount the storage directory for persistent files.
       - backend-storage:/var/www/html/storage/app
+    ports: !reset []
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
       - APP_URL=https://test-shopfully.andreafalcon.dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`test-shopfully.andreafalcon.dev`) && PathPrefix(`/api`, `/storage`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+      - "traefik.http.services.backend.loadbalancer.server.port=80"
+    networks:
+      - web
+      - app-network
 
   frontend:
+    # Use the image built by GitHub Actions instead of local build
+    image: ghcr.io/falconandrea/test-shopfully-frontend:latest
     build:
+      context: ./frontend
       target: production
-    ports:
-      # In prod, you might expose 80 instead of 5173, or let Traefik handle it
-      - "80:80"
-    volumes:
-      # Omit the dev volumes entirely. The image contains static built files.
-      - /app/node_modules # this can actually be removed in prod entirely, but keeping it empty here to override the base compose if needed. 
+    volumes: !reset []
+    ports: !reset []
     environment:
       - VITE_API_BASE_URL=https://test-shopfully.andreafalcon.dev/api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`test-shopfully.andreafalcon.dev`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+      - "traefik.http.routers.frontend.priority=1"
+      - "traefik.http.services.frontend.loadbalancer.server.port=5173"
+    depends_on:
+      - backend
+    networks:
+      - web
+      - app-network
+
+networks:
+  web:
+    external: true
+  app-network:
+    driver: bridge
 
 volumes:
   backend-storage:
