@@ -60,7 +60,7 @@ Last updated: 2026-05-02
   - [x] Filters: id, name, status (RF2)
   - [x] Loading / empty / error states (RF3)
   - [x] Favourite toggle per campaign (RF4)
-- [ ] Campaign detail page `/campaigns/:id` (RF5)
+- [ ] Campaign detail page `/campaigns/:id` (RF5) — **in progress (2026-05-03-005)**
   - [ ] Display full campaign info
   - [ ] Inline editing: name, status, landingUrl, coverImageUrl (RF5)
   - [ ] Creatives list (RF6)
