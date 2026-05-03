@@ -3,13 +3,10 @@
 
 services:
   backend:
-    # Use the image built by GitHub Actions instead of local build
+    # Use the image built by GitHub Actions
     image: ghcr.io/falconandrea/test-shopfully-backend:latest
-    build:
-      context: ./backend
-      target: production
     volumes:
-      - backend-storage:/var/www/html/storage/app
+      - ./storage:/var/www/html/storage/app
     ports: !reset []
     env_file:
       - .env
@@ -24,11 +21,8 @@ services:
       - app-network
 
   frontend:
-    # Use the image built by GitHub Actions instead of local build
+    # Use the image built by GitHub Actions
     image: ghcr.io/falconandrea/test-shopfully-frontend:latest
-    build:
-      context: ./frontend
-      target: production
     volumes: !reset []
     ports: !reset []
     environment:
@@ -51,7 +45,3 @@ networks:
     external: true
   app-network:
     driver: bridge
-
-volumes:
-  backend-storage:
-    driver: local
