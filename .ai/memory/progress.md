@@ -1,6 +1,6 @@
 # Campaign Manager — Progress
 
-## Status: 🚧 In Progress
+## Status: ✅ Completed
 
 Last updated: 2026-05-02
 
@@ -14,10 +14,10 @@ Last updated: 2026-05-02
 - [x] CORS configured for `http://localhost:5173`
 
 ### Data Layer
-- [x] `backend/data/campaigns.json` fixture created
-- [x] `CampaignService` singleton implemented (RD1, RD2, RD10)
-- [x] `CreativeService` singleton implemented (separation of concerns)
+- [x] `CampaignService` singleton implemented (RD1, RD2, RD10) — **ID: number**
+- [x] `CreativeService` singleton implemented (separation of concerns) — **campaignId: number**
 - [x] Registered in `AppServiceProvider` (RA10)
+- [x] Storage refactor: moved persistence to `storage/app/` and cleanup repo (RD3, RD4)
 - [x] Storage symlink configured, UUID-based naming (RD3, RD4)
 
 ### API Endpoints
@@ -71,10 +71,9 @@ Last updated: 2026-05-02
 - [x] `useCampaigns` (RF10)
 - [x] `useFavourites` — localStorage + cookie fallback (RF4, RF10)
 
-### Tests (Vitest)
-- [x] `useFavourites` — localStorage path (RT2)
-- [x] `useFavourites` — cookie fallback path (RT2)
-- [x] UI Components — CampaignGrid, CampaignCard, CampaignFilters
+- [x] `useCampaignDetail` — loading, saving, validation errors
+- [x] `useCreatives` — fetching and uploading
+- [x] UI Components — CampaignGrid, CampaignCard, CampaignFilters, CampaignInfoCard, CreativeUpload, CampaignDetailPage
 
 ---
 
@@ -83,10 +82,8 @@ Last updated: 2026-05-02
 - [x] Root `docker-compose.yml` starts both services (RO4)
 - [x] `backend/Dockerfile` — multi-stage (development + production targets)
 - [x] `frontend/Dockerfile` — multi-stage (development + production targets)
-- [x] `.env.example` for backend (RO5) — DB-free, no MySQL/Redis references
-- [x] Sail `compose.yaml` cleaned — removed MySQL, Redis, Meilisearch, Mailpit, Selenium
-- [x] `.env.example` for frontend (RO5)
-- [ ] `docker-compose.prod.yml` — production override with Traefik + subdomain routing
-- [ ] GitHub Actions workflow on push to `main` (RO2)
-- [ ] Live at `https://test-shopfully.andreafalcon.dev` (RO3)
-- [ ] Branch strategy in place: `feature/*` → `develop` → `main` (RO1)
+- [x] `.env.example` for backend (RO5)
+- [x] `server/docker-compose.prod.yml` — production override with Traefik + path routing (RO1)
+- [x] GitHub Actions workflow for Tests + Build & Push to GHCR + SSH Deploy (RO2)
+- [x] Live at `https://test-shopfully.andreafalcon.dev` (RO3)
+- [x] Branch strategy in place: `feature/*` → PR to `develop` → merge to `main` (RO1)

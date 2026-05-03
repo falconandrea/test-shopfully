@@ -12,7 +12,9 @@ Full-stack monorepo to manage advertising campaigns and their associated creativ
 
 ```
 test-shopfully/
-├── docker-compose.yml    # Dev: starts backend + frontend (docker-compose up)
+├── docker-compose.yml    # Dev: starts backend + frontend (docker compose up)
+├── .github/              # CI/CD: pipeline.yml for testing and GHCR build
+├── server/               # Prod: docker-compose overrides and deploy.sh
 ├── backend/              # Laravel 13 API (port 8000)
 │   ├── Dockerfile        # Multi-stage: development & production targets
 │   ├── compose.yaml      # Sail-only (local dev with sail up)
@@ -50,4 +52,4 @@ test-shopfully/
 - Follow the requirement codes (`RD`, `RB`, `RA`, `RF`, `RT`, `RO`, `RS`) when implementing features — reference them in commits and comments.
 - Branch strategy: `feature/*` → PR to `develop` → merge to `main`.
 - Do not commit `.env` files — use `.env.example` as reference.
-- `docker-compose up` from root must start both services with no additional setup.
+- `docker compose up` from root must start both services with no additional setup.
