@@ -123,13 +123,13 @@ export default function CampaignCard({
             height: 160,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.04),
+            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.08),
             borderBottom: (theme) => `1px solid ${alpha(theme.palette.divider, 0.5)}`,
-            color: 'text.secondary',
+            color: 'text.primary',
           }}
         >
-          <BrokenImageIcon sx={{ fontSize: 40, opacity: 0.4, mb: 1 }} />
-          <Typography variant="caption" sx={{ fontWeight: 500, opacity: 0.6 }}>
+          <BrokenImageIcon sx={{ fontSize: 40, opacity: 0.6, mb: 1 }} />
+          <Typography variant="caption" sx={{ fontWeight: 600, opacity: 1, color: 'text.primary' }}>
             No image available
           </Typography>
         </Box>
@@ -139,6 +139,7 @@ export default function CampaignCard({
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 0.5 }}>
             <Typography
               variant="subtitle1"
+              component="h2"
               sx={{
                 fontWeight: 600,
                 color: 'text.primary',
@@ -155,9 +156,9 @@ export default function CampaignCard({
               label={isActive ? 'Active' : 'Paused'}
               size="small"
               sx={{
-                fontWeight: 600,
+                fontWeight: 700,
                 backgroundColor: (theme) =>
-                  alpha(isActive ? theme.palette.success.main : theme.palette.warning.main, 0.15),
+                  alpha(isActive ? theme.palette.success.main : theme.palette.warning.main, 0.18),
                 color: (theme) =>
                   isActive ? theme.palette.success.main : theme.palette.warning.main,
               }}
@@ -169,8 +170,8 @@ export default function CampaignCard({
               variant="caption"
               sx={{
                 fontWeight: 700,
-                color: 'primary.main',
-                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                color: 'primary.light',
+                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.2),
                 px: 1,
                 py: 0.5,
                 borderRadius: 1,
@@ -178,7 +179,7 @@ export default function CampaignCard({
             >
               #{campaign.id}
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500 }}>
               {formattedDate}
             </Typography>
           </Box>
