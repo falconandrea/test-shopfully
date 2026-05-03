@@ -55,7 +55,7 @@ Last updated: 2026-05-02
 - [x] Docker configured (port 5173)
 
 ### Pages & Components
-- [ ] Campaign list page `/` (RF1)
+- [🚧] Campaign list page `/` (RF1) — **in progress (2026-05-03-004)**
   - [ ] Pagination controls (RF1)
   - [ ] Filters: id, name, status (RF2)
   - [ ] Loading / empty / error states (RF3)
