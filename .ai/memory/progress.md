@@ -60,12 +60,12 @@ Last updated: 2026-05-02
   - [x] Filters: id, name, status (RF2)
   - [x] Loading / empty / error states (RF3)
   - [x] Favourite toggle per campaign (RF4)
-- [ ] Campaign detail page `/campaigns/:id` (RF5) — **in progress (2026-05-03-005)**
-  - [ ] Display full campaign info
-  - [ ] Inline editing: name, status, landingUrl, coverImageUrl (RF5)
-  - [ ] Creatives list (RF6)
-  - [ ] Creative upload form with client-side dimension check (RF7)
-  - [ ] Inline 422 error display (RF8)
+- [x] Campaign detail page `/campaigns/:id` (RF5) — **completed (2026-05-03-005)**
+  - [x] Display full campaign info
+  - [x] Inline editing: name, status, landingUrl, coverImageUrl (RF5)
+  - [x] Creatives list (RF6)
+  - [x] Creative upload form with client-side dimension check (RF7)
+  - [x] Inline 422 error display (RF8)
 
 ### Hooks
 - [x] `useCampaigns` (RF10)
