@@ -1,0 +1,31 @@
+# Campaign Manager — Production
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+
+services:
+  backend:
+    build:
+      target: production
+    volumes:
+      # Omit the host code mount so the built image code is used.
+      # Only mount the storage directory for persistent files.
+      - backend-storage:/var/www/html/storage/app
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=https://test-shopfully.andreafalcon.dev
+
+  frontend:
+    build:
+      target: production
+    ports:
+      # In prod, you might expose 80 instead of 5173, or let Traefik handle it
+      - "80:80"
+    volumes:
+      # Omit the dev volumes entirely. The image contains static built files.
+      - /app/node_modules # this can actually be removed in prod entirely, but keeping it empty here to override the base compose if needed. 
+    environment:
+      - VITE_API_BASE_URL=https://test-shopfully.andreafalcon.dev/api
+
+volumes:
+  backend-storage:
+    driver: local

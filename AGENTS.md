@@ -12,19 +12,26 @@ Full-stack monorepo to manage advertising campaigns and their associated creativ
 
 ```
 test-shopfully/
-├── backend/          # Laravel 13 API (port 8000)
-│   ├── AGENTS.md     # Laravel Boost rules — do not modify
-│   └── .agents/      # Laravel Boost skills only
+├── docker-compose.yml    # Dev: starts backend + frontend (docker-compose up)
+├── backend/              # Laravel 13 API (port 8000)
+│   ├── Dockerfile        # Multi-stage: development & production targets
+│   ├── compose.yaml      # Sail-only (local dev with sail up)
+│   ├── .dockerignore
+│   ├── .env.example
+│   ├── AGENTS.md         # Laravel Boost rules — do not modify
+│   └── .agents/          # Laravel Boost skills only
 │       └── skills/
-├── frontend/         # React 19 + Vite + TypeScript + MUI (port 5173)
-├── .agents/          # Project-level agent workflows
-│   └── workflows/    # feature.md, setup.md, start.md
-├── .ai/              # Global project context & memory
-│   ├── context/      # requirements.md, architecture.md, app_flow.md
-│   ├── features/     # Feature specs & task lists
-│   ├── memory/       # progress.md, lessons.md
-│   └── prompts/      # Reusable agent prompts
-└── AGENTS.md         # This file
+├── frontend/             # React 19 + Vite + TypeScript + MUI (port 5173)
+│   ├── Dockerfile        # Multi-stage: development & production targets
+│   └── .env.example
+├── .agents/              # Project-level agent workflows
+│   └── workflows/        # feature.md, setup.md, start.md
+├── .ai/                  # Global project context & memory
+│   ├── context/          # requirements.md, architecture.md, app_flow.md
+│   ├── features/         # Feature specs & task lists
+│   ├── memory/           # progress.md, lessons.md
+│   └── prompts/          # Reusable agent prompts
+└── AGENTS.md             # This file
 ```
 
 ## Context Files
