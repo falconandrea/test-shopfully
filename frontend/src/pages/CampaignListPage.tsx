@@ -51,12 +51,17 @@ export default function CampaignListPage() {
   return (
     <Box>
       {/* Page header */}
-      <Typography variant="h4" sx={{ mb: 0.5 }}>
+      <Typography variant="h4" component="h1" sx={{ mb: 0.5, fontWeight: 700 }}>
         Campaigns
       </Typography>
-      <Typography variant="body2" sx={{ mb: 3 }}>
+      <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
         Manage your advertising campaigns and creatives.
       </Typography>
+
+      {/* Results status for screen readers */}
+      <Box role="status" aria-live="polite" className="sr-only" sx={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: 0 }}>
+        {loading ? 'Loading campaigns...' : `${campaigns.length} campaigns shown`}
+      </Box>
 
       {/* Filters */}
       <CampaignFiltersBar filters={filters} onFilterChange={handleFilterChange} />

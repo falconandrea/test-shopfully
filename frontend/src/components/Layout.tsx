@@ -16,13 +16,14 @@ export default function Layout() {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <AppBar position="sticky">
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }} component="div">
+      <AppBar position="sticky" component="header">
         <Toolbar>
           <IconButton
             edge="start"
             color="primary"
             onClick={() => navigate('/')}
+            aria-label="Go to campaigns list"
             sx={{
               mr: 1.5,
               background: (theme) => alpha(theme.palette.primary.main, 0.1),
@@ -41,8 +42,16 @@ export default function Layout() {
               background: 'linear-gradient(135deg, #6C63FF 0%, #FF6B8A 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontWeight: 700,
             }}
             onClick={() => navigate('/')}
+            role="link"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                navigate('/');
+              }
+            }}
           >
             Campaign Manager
           </Typography>
@@ -51,6 +60,7 @@ export default function Layout() {
 
       <Container
         maxWidth="lg"
+        component="main"
         sx={{
           flex: 1,
           py: 4,

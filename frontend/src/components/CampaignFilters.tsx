@@ -90,8 +90,11 @@ export default function CampaignFiltersBar({ filters, onFilterChange }: Campaign
         flexWrap: 'wrap',
         alignItems: 'center',
       }}
+      component="section"
+      aria-label="Campaign filters"
     >
       <TextField
+        label="Search"
         placeholder="Search by name or ID…"
         value={searchValue}
         onChange={handleSearchChange}
@@ -109,13 +112,13 @@ export default function CampaignFiltersBar({ filters, onFilterChange }: Campaign
 
       <TextField
         select
+        label="Status"
         value={filters.status === undefined ? '' : String(filters.status)}
         onChange={handleStatusChange}
         sx={{ minWidth: 160 }}
-        slotProps={{
-          select: {
-            displayEmpty: true,
-          },
+        SelectProps={{
+          displayEmpty: true,
+          inputProps: { 'aria-label': 'Filter by status' },
         }}
       >
         {STATUS_OPTIONS.map((opt) => (
@@ -131,6 +134,9 @@ export default function CampaignFiltersBar({ filters, onFilterChange }: Campaign
             checked={!!filters.favouritesOnly}
             onChange={handleFavouritesChange}
             color="primary"
+            slotProps={{
+              input: { 'aria-label': 'Show favourites only' }
+            }}
           />
         }
         label="Favourites only"
