@@ -79,7 +79,7 @@ class ImportCampaignsCommand extends Command
 
         fclose($file);
 
-        $jsonPath = base_path('data/campaigns.json');
+        $jsonPath = storage_path('app/campaigns.json');
         $jsonDir = dirname($jsonPath);
 
         if (! File::exists($jsonDir)) {

@@ -15,7 +15,13 @@ class CampaignService
 
     public function __construct(?string $campaignsFile = null)
     {
-        $this->campaignsFile = $campaignsFile ?? base_path('data/campaigns.json');
+        $this->campaignsFile = $campaignsFile ?? storage_path('app/campaigns.json');
+
+        // Migration logic: if storage file doesn't exist but data file does, copy it
+        if (!File::exists($this->campaignsFile) && File::exists(base_path('data/campaigns.json'))) {
+            File::ensureDirectoryExists(dirname($this->campaignsFile));
+            File::copy(base_path('data/campaigns.json'), $this->campaignsFile);
+        }
 
         $this->loadCampaigns();
     }

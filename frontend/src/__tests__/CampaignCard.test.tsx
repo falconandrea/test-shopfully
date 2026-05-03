@@ -16,7 +16,7 @@ vi.mock('react-router-dom', async () => {
 
 describe('CampaignCard', () => {
   const campaign: Campaign = {
-    id: '123',
+    id: 123,
     name: 'Halloween Promo',
     status: 1,
     landingUrl: 'https://example.com',
@@ -61,7 +61,7 @@ describe('CampaignCard', () => {
     const favButton = screen.getByLabelText('Add to favourites');
     fireEvent.click(favButton);
 
-    expect(mockToggleFavourite).toHaveBeenCalledWith('123');
+    expect(mockToggleFavourite).toHaveBeenCalledWith(123);
     // Ensure navigate was NOT called because we used e.stopPropagation()
     expect(mockNavigate).not.toHaveBeenCalled();
   });

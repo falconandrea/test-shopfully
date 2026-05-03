@@ -18,7 +18,8 @@ docker-compose up --build
 - Backend API: `http://localhost:8000`
 - Frontend SPA: `http://localhost:5173`
 
-> **Note:** No database or external services are required. All data is stored in JSON files.
+> **Note:** No database or external services are required. All data is stored in JSON files within the `backend/storage/app` directory (ignored by Git).
+> **Important:** You must import the initial data after the first build (see Custom Commands below).
 
 ### Laravel Sail (backend only)
 
@@ -112,8 +113,11 @@ To populate the JSON data fixture from the original CSV file, you can run the fo
 ```bash
 # From the backend/ folder
 php artisan app:import-campaigns
+
+# Or via Docker
+docker-compose exec backend php artisan app:import-campaigns
 ```
-*(By default, this looks for `campaigns_data_2026.csv` in the project root and generates `backend/data/campaigns.json`)*
+*(This command populates `backend/storage/app/campaigns.json`. By default, it looks for `campaigns_data_2026.csv` in the project root)*
 
 ## Known Limitations & Future Enhancements
 - **Delete Creative API:** Currently, the system supports uploading up to 3 creatives per campaign. However, there is no API endpoint to delete an existing creative. In a future iteration, a `DELETE /api/creatives/{id}` endpoint should be implemented to prevent campaigns from becoming permanently locked once the limit is reached.

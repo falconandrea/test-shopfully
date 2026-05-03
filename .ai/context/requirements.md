@@ -26,7 +26,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 ## Data Models
 
-### Campaign (from `backend/data/campaigns.json`)
+### Campaign (persisted to `backend/storage/app/campaigns.json`)
 
 | Field         | Type   | Notes                  |
 |---------------|--------|------------------------|
@@ -50,7 +50,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 ## RD — Data & Storage
 
-**RD1** — Campaigns are loaded from `backend/data/campaigns.json` once at application boot via a singleton `CampaignService`. The file is a static fixture committed to the repository. No user upload, no database.
+**RD1** — Campaigns are persisted to `backend/storage/app/campaigns.json`. On the first run, the system can migrate data from a `backend/data/campaigns.json` fixture (if present) or be populated via the `app:import-campaigns` command. The runtime file is ignored by Git to prevent repository pollution.
 
 **RD2** — Creatives are persisted to `storage/app/creatives.json`. The file is read at boot and written on every create operation. This avoids the need for a database while keeping data consistent across server restarts. The Docker volume (RD4) covers both image files and this JSON file.
 

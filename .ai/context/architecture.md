@@ -13,7 +13,7 @@
 ## Key Architectural Decisions
 
 ### No Database
-Campaigns are loaded from a static JSON file (`backend/data/campaigns.json`) into a singleton `CampaignService` at boot. Creatives are persisted to `storage/app/creatives.json` — read at boot, written on every create operation. Both files are plain JSON; no ORM or database engine is involved. The Docker volume ensures both image files and `creatives.json` survive container restarts.
+Campaigns and creatives are persisted to JSON files in `backend/storage/app/` (`campaigns.json` and `creatives.json`). These files are loaded into a singleton `CampaignService` at boot. While `creatives.json` is updated on every upload, `campaigns.json` can be populated via a CSV import command or migrated from an initial fixture. Both runtime files are ignored by Git, and the Docker volume ensures data persistence across container restarts. No ORM or database engine is involved.
 
 ### CampaignService as Singleton
 Registered in `AppServiceProvider`. Holds all in-memory state (campaigns + creatives). All controllers depend on it via dependency injection.
