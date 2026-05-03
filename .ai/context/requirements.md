@@ -30,7 +30,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 
 | Field         | Type   | Notes                  |
 |---------------|--------|------------------------|
-| id            | string | Provided in fixture    |
+| id            | number | Provided in fixture    |
 | name          | string |                        |
 | status        | int    | 1 = Active, 0 = Paused |
 | landingUrl    | string | Valid URL              |
@@ -42,7 +42,7 @@ Full-stack application to manage advertising campaigns and their associated crea
 | Field      | Type   | Notes                           |
 |------------|--------|---------------------------------|
 | id         | string | UUID generated server-side      |
-| campaignId | string | Reference to parent campaign    |
+| campaignId | number | Reference to parent campaign    |
 | assetUrl   | string | Public URL to uploaded image    |
 | createdAt  | string | ISO 8601, generated server-side |
 
