@@ -25,6 +25,8 @@ CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 FROM base AS production
 
 # Build static assets
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 RUN npm run build
 
 # Serve with a lightweight static server
