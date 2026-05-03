@@ -2,7 +2,7 @@
 
 ## Status: 🚧 In Progress
 
-Last updated: 2026-05-01
+Last updated: 2026-05-02
 
 ---
 
@@ -48,11 +48,11 @@ Last updated: 2026-05-01
 ## Frontend (React 19 + Vite + TypeScript + MUI)
 
 ### Setup
-- [ ] Vite + React 19 + TypeScript scaffolded
-- [ ] Material UI installed and configured
-- [ ] React Router configured
-- [ ] Axios instance at `src/services/api.ts` (RF9)
-- [ ] Docker configured (port 5173)
+- [x] Vite + React 19 + TypeScript scaffolded
+- [x] Material UI installed and configured
+- [x] React Router configured
+- [x] Axios instance at `src/services/api.ts` (RF9)
+- [x] Docker configured (port 5173)
 
 ### Pages & Components
 - [ ] Campaign list page `/` (RF1)
