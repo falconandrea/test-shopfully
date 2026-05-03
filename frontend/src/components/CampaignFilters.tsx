@@ -121,6 +121,9 @@ export default function CampaignFiltersBar({ filters, onFilterChange }: Campaign
             displayEmpty: true,
             inputProps: { 'aria-label': 'Filter by status' },
           },
+          inputLabel: {
+            shrink: true,
+          },
         }}
       >
         {STATUS_OPTIONS.map((opt) => (
