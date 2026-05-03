@@ -14,8 +14,8 @@ interface CampaignGridProps {
   campaigns: Campaign[];
   meta: PaginationMeta | null;
   loading: boolean;
-  isFavourite: (id: string) => boolean;
-  onToggleFavourite: (id: string) => void;
+  isFavourite: (id: number) => boolean;
+  onToggleFavourite: (id: number) => void;
   onPageChange: (page: number) => void;
 }
 

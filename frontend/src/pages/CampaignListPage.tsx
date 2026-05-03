@@ -33,7 +33,7 @@ export default function CampaignListPage() {
     if (filters.favouritesOnly) {
       // Pass the IDs to filter on the backend
       // If favourites is empty, we must pass a fake ID to return 0 results
-      return { ...filters, ids: favourites.length > 0 ? favourites : ['non-existent-id'] };
+      return { ...filters, ids: favourites.length > 0 ? favourites : [-1] };
     }
     return filters;
   }, [filters, favourites]);
